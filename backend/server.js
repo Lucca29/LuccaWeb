@@ -15,24 +15,24 @@ const contactRoutes = require('./routes/contact');
 
 const app = express();
 
-// Middleware de sécurité
-app.use(helmet({
-    contentSecurityPolicy: {
-        directives: {
-            defaultSrc: ["'self'"],
-            styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com", "https://cdn.tiny.cloud"],
-            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "'unsafe-hashes'", "https://cdn.tiny.cloud"],
-            scriptSrcAttr: ["'unsafe-inline'", "'unsafe-hashes'"], // Autorise tous les gestionnaires d'événements inline
-            fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
-            imgSrc: ["'self'", "data:", "blob:", "https:", "http:"],
-            connectSrc: ["'self'", "https://cdn.tiny.cloud"],
-            frameSrc: ["'self'"],
-            workerSrc: ["'self'", "blob:"],
-            objectSrc: ["'none'"],
-            baseUri: ["'self'"]
-        }
-    }
-}));
+// Middleware de sécurité - Temporairement désactivé pour le développement
+// app.use(helmet({
+//     contentSecurityPolicy: {
+//         directives: {
+//             defaultSrc: ["'self'"],
+//             styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com", "https://cdn.tiny.cloud"],
+//             scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "'unsafe-hashes'", "https://cdn.tiny.cloud"],
+//             scriptSrcAttr: ["'unsafe-inline'", "'unsafe-hashes'"], // Autorise tous les gestionnaires d'événements inline
+//             fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
+//             imgSrc: ["'self'", "data:", "blob:", "https:", "http:"],
+//             connectSrc: ["'self'", "https://cdn.tiny.cloud"],
+//             frameSrc: ["'self'"],
+//             workerSrc: ["'self'", "blob:"],
+//             objectSrc: ["'none'"],
+//             baseUri: ["'self'"]
+//         }
+//     }
+// }));
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
@@ -164,7 +164,7 @@ async function startServer() {
         console.log('🔐 Mot de passe: AdminLucca2024!');
         
         // Démarrage du serveur
-        app.listen(config.port, () => {
+        app.listen(config.port, '0.0.0.0', () => {
             console.log('🚀 =================================');
             console.log('🎉 SERVEUR BLOG AGENCE LUCCA DÉMARRÉ');
             console.log('🚀 =================================');
