@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Agence Lucca</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: #fff;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2563eb;
+            font-size: 2.5rem;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2563eb;
+            background: white;
+            color: #2563eb;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .article-card[data-slug] {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .article-card[data-slug]:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.2);
+            border: 2px solid #2563eb;
+        }
+        
+        .article-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #2563eb, #7c3aed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .article-content {
+            padding: 1.5rem;
+        }
+        
+        .article-category {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #1a202c;
+        }
+        
+        .article-excerpt {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .article-date {
+            font-weight: 500;
+        }
+        
+        .article-views {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .no-articles {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .pagination button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .pagination button:hover:not(:disabled) {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+        
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pagination .active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.1rem;
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>📖 Blog Agence Lucca</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Filtres par catégorie -->
+        <div class="filters" id="categoryFilters">
+            <button class="filter-btn active" data-category="">Tous les articles</button>
+        </div>
+
+        <!-- Zone de chargement -->
+        <div class="loading" id="loading">
+            🔄 Chargement des articles...
+        </div>
+
+        <!-- Grille des articles -->
+        <div class="articles-grid" id="articlesGrid" style="display: none;">
+            <!-- Articles générés par JavaScript -->
+        </div>
+
+        <!-- Message si aucun article -->
+        <div class="no-articles" id="noArticles" style="display: none;">
+            📝 Aucun article publié pour le moment.<br>
+            <small>Créez votre premier article dans l'interface d'administration !</small>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination" style="display: none;">
+            <!-- Pagination générée par JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Configuration API
+        const API_BASE = 'http://localhost:3000/api';
+        
+        // État de l'application
+        let currentPage = 1;
+        let currentCategory = '';
+        let articles = [];
+        let categories = [];
+        
+        // Utilitaires
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('fr-FR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+        
+        function formatNumber(num) {
+            return new Intl.NumberFormat('fr-FR').format(num);
+        }
+        
+        // Chargement des catégories
+        async function loadCategories() {
+            try {
+                const response = await fetch(`${API_BASE}/categories`);
+                if (response.ok) {
+                    const data = await response.json();
+                    categories = data.success ? data.data : data;
+                    renderCategoryFilters();
+                }
+            } catch (error) {
+                console.error('Erreur chargement catégories:', error);
+            }
+        }
+        
+        // Rendu des filtres de catégories
+        function renderCategoryFilters() {
+            const container = document.getElementById('categoryFilters');
+            const buttonsHTML = categories.map(cat => 
+                `<button class="filter-btn" data-category="${cat.id}" style="border-color: ${cat.color}">
+                    ${cat.name}
+                </button>`
+            ).join('');
+            
+            container.innerHTML = `
+                <button class="filter-btn active" data-category="">Tous les articles</button>
+                ${buttonsHTML}
+            `;
+            
+            // Event listeners pour les filtres
+            container.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentCategory = btn.dataset.category;
+                    currentPage = 1;
+                    loadArticles();
+                });
+            });
+        }
+        
+        // Chargement des articles
+        async function loadArticles() {
+            try {
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('articlesGrid').style.display = 'none';
+                document.getElementById('noArticles').style.display = 'none';
+                document.getElementById('pagination').style.display = 'none';
+                
+                const params = new URLSearchParams({
+                    page: currentPage,
+                    limit: 6,
+                    status: 'published'
+                });
+                
+                if (currentCategory) {
+                    params.append('category', currentCategory);
+                }
+                
+                const response = await fetch(`${API_BASE}/articles?${params}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const result = data.success ? data.data : data;
+                    
+                    articles = result.articles || [];
+                    
+                    document.getElementById('loading').style.display = 'none';
+                    
+                    if (articles.length === 0) {
+                        document.getElementById('noArticles').style.display = 'block';
+                    } else {
+                        renderArticles();
+                        renderPagination(result.pagination);
+                    }
+                } else {
+                    throw new Error('Erreur de chargement');
+                }
+                
+            } catch (error) {
+                console.error('Erreur chargement articles:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('noArticles').style.display = 'block';
+                document.getElementById('noArticles').innerHTML = `
+                    ❌ Erreur de chargement des articles.<br>
+                    <small>Vérifiez que le serveur API est démarré sur localhost:3000</small>
+                `;
+            }
+        }
+        
+        // Rendu des articles
+        function renderArticles() {
+            const grid = document.getElementById('articlesGrid');
+            
+            grid.innerHTML = articles.map(article => `
+                <article class="article-card" data-slug="${article.slug}" style="cursor: pointer;">
+                    <div class="article-image">
+                        ${article.featured_image ? 
+                            `<img src="${article.featured_image}" alt="${article.title}">` : 
+                            '📄'
+                        }
+                    </div>
+                    <div class="article-content">
+                        ${article.category_name ? 
+                            `<span class="article-category" style="background-color: ${article.category_color}20; color: ${article.category_color}">
+                                ${article.category_name}
+                            </span>` : ''
+                        }
+                        <h2 class="article-title">${article.title}</h2>
+                        <p class="article-excerpt">
+                            ${article.excerpt || (article.content ? article.content.replace(/<[^>]*>/g, '').substring(0, 150) + '...' : 'Pas de résumé disponible')}
+                        </p>
+                        <div class="article-meta">
+                            <span class="article-date">${formatDate(article.created_at)}</span>
+                            <span class="article-views">👁️ ${formatNumber(article.views || 0)}</span>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+            
+            // Ajouter les event listeners pour les clics sur les articles
+            grid.querySelectorAll('.article-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const slug = card.dataset.slug;
+                    if (slug) {
+                        window.location.href = `/article/${slug}`;
+                    }
+                });
+            });
+            
+            grid.style.display = 'grid';
+        }
+        
+        // Rendu de la pagination
+        function renderPagination(pagination) {
+            if (!pagination || pagination.totalPages <= 1) return;
+            
+            const container = document.getElementById('pagination');
+            const { currentPage: page, totalPages } = pagination;
+            
+            let buttonsHTML = `
+                <button ${page === 1 ? 'disabled' : ''} data-page="${page - 1}">
+                    ← Précédent
+                </button>
+            `;
+            
+            for (let i = Math.max(1, page - 2); i <= Math.min(totalPages, page + 2); i++) {
+                buttonsHTML += `
+                    <button class="${i === page ? 'active' : ''}" data-page="${i}">
+                        ${i}
+                    </button>
+                `;
+            }
+            
+            buttonsHTML += `
+                <button ${page === totalPages ? 'disabled' : ''} data-page="${page + 1}">
+                    Suivant →
+                </button>
+            `;
+            
+            container.innerHTML = buttonsHTML;
+            container.style.display = 'flex';
+            
+            // Ajouter les event listeners
+            container.querySelectorAll('button:not([disabled])').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const page = parseInt(btn.dataset.page);
+                    if (page && page !== currentPage) {
+                        changePage(page);
+                    }
+                });
+            });
+        }
+        
+        // Changement de page
+        function changePage(page) {
+            currentPage = page;
+            loadArticles();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCategories();
+            loadArticles();
+        });
+    </script>
+</body>
+</html> 
