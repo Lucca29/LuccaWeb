@@ -1290,7 +1290,7 @@ function initializeEventListeners() {
             
             // Affichage de la prévisualisation
             document.getElementById('imagePreview').style.display = 'block';
-            document.getElementById('previewImg').src = result.url;
+            document.getElementById('previewImg').src = result.data.url;
             document.querySelector('.upload-placeholder').style.display = 'none';
             
             ui.showToast('Image uploadée avec succès', 'success');
