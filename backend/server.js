@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const sqlite3 = require('sqlite3').verbose();
+const Database = require('better-sqlite3');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 // Configuration de la base de données
 const dbPath = './database/blog.db';
-const db = new sqlite3.Database(dbPath);
+const db = new Database(dbPath);
 
 // Configuration CORS - Permettre les requêtes depuis votre domaine
 app.use(cors({
@@ -40,48 +40,47 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Initialisation de la base de données
 function initDatabase() {
-    db.serialize(() => {
-        // Table des utilisateurs
-        db.run(`CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL,
-            role TEXT DEFAULT 'admin',
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-        )`);
+    // Table des utilisateurs
+    db.exec(`CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL,
+        role TEXT DEFAULT 'admin',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )`);
 
-        // Table des catégories
-        db.run(`CREATE TABLE IF NOT EXISTS categories (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            description TEXT,
-            color TEXT DEFAULT '#007bff',
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-        )`);
+    // Table des catégories
+    db.exec(`CREATE TABLE IF NOT EXISTS categories (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        description TEXT,
+        color TEXT DEFAULT '#007bff',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )`);
 
-        // Table des articles
-        db.run(`CREATE TABLE IF NOT EXISTS articles (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL,
-            slug TEXT UNIQUE NOT NULL,
-            content TEXT,
-            excerpt TEXT,
-            featured_image TEXT,
-            category_id INTEGER,
-            status TEXT DEFAULT 'draft',
-            views INTEGER DEFAULT 0,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (category_id) REFERENCES categories (id)
-        )`);
+    // Table des articles
+    db.exec(`CREATE TABLE IF NOT EXISTS articles (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        slug TEXT UNIQUE NOT NULL,
+        content TEXT,
+        excerpt TEXT,
+        featured_image TEXT,
+        category_id INTEGER,
+        status TEXT DEFAULT 'draft',
+        views INTEGER DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (category_id) REFERENCES categories (id)
+    )`);
 
-        // Créer l'utilisateur admin par défaut
-        const adminPassword = bcrypt.hashSync('AdminLucca2024!', 10);
-        db.run(`INSERT OR IGNORE INTO users (email, password, role) VALUES (?, ?, ?)`, 
-            ['admin@agence-lucca.fr', adminPassword, 'admin']);
+    // Créer l'utilisateur admin par défaut
+    const adminPassword = bcrypt.hashSync('AdminLucca2024!', 10);
+    const stmt = db.prepare(`INSERT OR IGNORE INTO users (email, password, role) VALUES (?, ?, ?)`);
+    stmt.run('admin@agence-lucca.fr', adminPassword, 'admin');
+    stmt.finalize();
 
-        console.log('✅ Base de données initialisée');
-    });
+    console.log('✅ Base de données initialisée');
 }
 
 // Routes API
@@ -175,33 +174,30 @@ app.get('/api/articles', (req, res) => {
         LIMIT ? OFFSET ?
     `;
     
-    db.all(query, [...params, limit, offset], (err, articles) => {
-        if (err) {
-            console.error('Erreur articles:', err);
-            return res.status(500).json({ success: false, message: 'Erreur serveur' });
-        }
+    try {
+        const stmt = db.prepare(query);
+        const articles = stmt.all(...params, limit, offset);
         
         // Compter le total
-        db.get(`SELECT COUNT(*) as total FROM articles a ${whereClause}`, params, (err, result) => {
-            if (err) {
-                console.error('Erreur count:', err);
-                return res.status(500).json({ success: false, message: 'Erreur serveur' });
-            }
-            
-            res.json({
-                success: true,
-                data: {
-                    articles,
-                    pagination: {
-                        currentPage: parseInt(page),
-                        totalPages: Math.ceil(result.total / limit),
-                        total: result.total,
-                        limit: parseInt(limit)
-                    }
+        const countStmt = db.prepare(`SELECT COUNT(*) as total FROM articles a ${whereClause}`);
+        const result = countStmt.get(...params);
+        
+        res.json({
+            success: true,
+            data: {
+                articles,
+                pagination: {
+                    currentPage: parseInt(page),
+                    totalPages: Math.ceil(result.total / limit),
+                    total: result.total,
+                    limit: parseInt(limit)
                 }
-            });
+            }
         });
-    });
+    } catch (error) {
+        console.error('Erreur articles:', error);
+        res.status(500).json({ success: false, message: 'Erreur serveur' });
+    }
 });
 
 app.get('/api/articles/:slug', (req, res) => {
@@ -214,24 +210,26 @@ app.get('/api/articles/:slug', (req, res) => {
         WHERE a.slug = ?
     `;
     
-    db.get(query, [slug], (err, article) => {
-        if (err) {
-            console.error('Erreur article:', err);
-            return res.status(500).json({ success: false, message: 'Erreur serveur' });
-        }
+    try {
+        const stmt = db.prepare(query);
+        const article = stmt.get(slug);
         
         if (!article) {
             return res.status(404).json({ success: false, message: 'Article non trouvé' });
         }
         
         // Incrémenter les vues
-        db.run('UPDATE articles SET views = views + 1 WHERE id = ?', [article.id]);
+        const updateStmt = db.prepare('UPDATE articles SET views = views + 1 WHERE id = ?');
+        updateStmt.run(article.id);
         
         res.json({
             success: true,
             data: article
         });
-    });
+    } catch (error) {
+        console.error('Erreur article:', error);
+        res.status(500).json({ success: false, message: 'Erreur serveur' });
+    }
 });
 
 app.post('/api/articles', (req, res) => {
@@ -243,17 +241,18 @@ app.post('/api/articles', (req, res) => {
         VALUES (?, ?, ?, ?, ?, ?)
     `;
     
-    db.run(query, [title, slug, content, excerpt, category_id, status], function(err) {
-        if (err) {
-            console.error('Erreur création article:', err);
-            return res.status(500).json({ success: false, message: 'Erreur serveur' });
-        }
+    try {
+        const stmt = db.prepare(query);
+        const result = stmt.run(title, slug, content, excerpt, category_id, status);
         
         res.json({
             success: true,
-            data: { id: this.lastID, slug }
+            data: { id: result.lastInsertRowid, slug }
         });
-    });
+    } catch (error) {
+        console.error('Erreur création article:', error);
+        res.status(500).json({ success: false, message: 'Erreur serveur' });
+    }
 });
 
 app.put('/api/articles/:id', (req, res) => {
@@ -267,99 +266,103 @@ app.put('/api/articles/:id', (req, res) => {
         WHERE id = ?
     `;
     
-    db.run(query, [title, slug, content, excerpt, category_id, status, id], function(err) {
-        if (err) {
-            console.error('Erreur mise à jour article:', err);
-            return res.status(500).json({ success: false, message: 'Erreur serveur' });
-        }
+    try {
+        const stmt = db.prepare(query);
+        stmt.run(title, slug, content, excerpt, category_id, status, id);
         
         res.json({
             success: true,
             data: { id, slug }
         });
-    });
+    } catch (error) {
+        console.error('Erreur mise à jour article:', error);
+        res.status(500).json({ success: false, message: 'Erreur serveur' });
+    }
 });
 
 app.delete('/api/articles/:id', (req, res) => {
     const { id } = req.params;
     
-    db.run('DELETE FROM articles WHERE id = ?', [id], function(err) {
-        if (err) {
-            console.error('Erreur suppression article:', err);
-            return res.status(500).json({ success: false, message: 'Erreur serveur' });
-        }
+    try {
+        const stmt = db.prepare('DELETE FROM articles WHERE id = ?');
+        stmt.run(id);
         
         res.json({
             success: true,
             message: 'Article supprimé'
         });
-    });
+    } catch (error) {
+        console.error('Erreur suppression article:', error);
+        res.status(500).json({ success: false, message: 'Erreur serveur' });
+    }
 });
 
 // Routes des catégories
 app.get('/api/categories', (req, res) => {
-    db.all('SELECT * FROM categories ORDER BY name', (err, categories) => {
-        if (err) {
-            console.error('Erreur catégories:', err);
-            return res.status(500).json({ success: false, message: 'Erreur serveur' });
-        }
+    try {
+        const stmt = db.prepare('SELECT * FROM categories ORDER BY name');
+        const categories = stmt.all();
         
         res.json({
             success: true,
             data: categories
         });
-    });
+    } catch (error) {
+        console.error('Erreur catégories:', error);
+        res.status(500).json({ success: false, message: 'Erreur serveur' });
+    }
 });
 
 app.post('/api/categories', (req, res) => {
     const { name, description, color } = req.body;
     
-    db.run('INSERT INTO categories (name, description, color) VALUES (?, ?, ?)', 
-        [name, description, color], function(err) {
-        if (err) {
-            console.error('Erreur création catégorie:', err);
-            return res.status(500).json({ success: false, message: 'Erreur serveur' });
-        }
+    try {
+        const stmt = db.prepare('INSERT INTO categories (name, description, color) VALUES (?, ?, ?)');
+        const result = stmt.run(name, description, color);
         
         res.json({
             success: true,
-            data: { id: this.lastID }
+            data: { id: result.lastInsertRowid }
         });
-    });
+    } catch (error) {
+        console.error('Erreur création catégorie:', error);
+        res.status(500).json({ success: false, message: 'Erreur serveur' });
+    }
 });
 
 app.put('/api/categories/:id', (req, res) => {
     const { id } = req.params;
     const { name, description, color } = req.body;
     
-    db.run('UPDATE categories SET name = ?, description = ?, color = ? WHERE id = ?', 
-        [name, description, color, id], function(err) {
-        if (err) {
-            console.error('Erreur mise à jour catégorie:', err);
-            return res.status(500).json({ success: false, message: 'Erreur serveur' });
-        }
+    try {
+        const stmt = db.prepare('UPDATE categories SET name = ?, description = ?, color = ? WHERE id = ?');
+        stmt.run(name, description, color, id);
         
         res.json({
             success: true,
             message: 'Catégorie mise à jour'
         });
-    });
+    } catch (error) {
+        console.error('Erreur mise à jour catégorie:', error);
+        res.status(500).json({ success: false, message: 'Erreur serveur' });
+    }
 });
 
 app.delete('/api/categories/:id', (req, res) => {
     const { id } = req.params;
     
-    db.run('DELETE FROM categories WHERE id = ?', [id], function(err) {
-        if (err) {
-            console.error('Erreur suppression catégorie:', err);
-            return res.status(500).json({ success: false, message: 'Erreur serveur' });
-        }
+    try {
+        const stmt = db.prepare('DELETE FROM categories WHERE id = ?');
+        stmt.run(id);
         
         res.json({
             success: true,
             message: 'Catégorie supprimée'
         });
-    });
+    } catch (error) {
+        console.error('Erreur suppression catégorie:', error);
+        res.status(500).json({ success: false, message: 'Erreur serveur' });
+    }
 });
 
 // Upload d'images

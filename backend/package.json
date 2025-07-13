@@ -29,7 +29,7 @@
     "nodemailer": "^6.10.1",
     "sharp": "^0.32.6",
     "slugify": "^1.6.6",
-    "sqlite3": "^5.1.6"
+    "better-sqlite3": "^9.2.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
