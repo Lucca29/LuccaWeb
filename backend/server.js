@@ -78,7 +78,6 @@ function initDatabase() {
     const adminPassword = bcrypt.hashSync('AdminLucca2024!', 10);
     const stmt = db.prepare(`INSERT OR IGNORE INTO users (email, password, role) VALUES (?, ?, ?)`);
     stmt.run('admin@agence-lucca.fr', adminPassword, 'admin');
-    stmt.finalize();
 
     console.log('✅ Base de données initialisée');
 }
