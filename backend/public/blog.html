@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Lucca</title>
+    <link rel="icon" type="image/png" href="images/logos/logopetit.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Variables CSS Lucca */
+        :root {
+            --primary-color: #4FFFB0;
+            --bg-dark: #0a0a0f;
+            --bg-darker: #05050a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --purple-glow: #8b5cf6;
+            --pink-glow: #ec4899;
+            --green-glow: #10b981;
+            --gradient-button: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+        }
+        /* Styles spécifiques au blog - Charte graphique Lucca */
+        .blog-section {
+            padding: 180px 0 80px;
+            background-color: var(--bg-dark);
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .blog-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .blog-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .blog-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .filter-btn {
+            padding: 12px 24px;
+            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .filter-btn:hover::before {
+            left: 100%;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gradient-button);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .blog-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(124, 127, 198, 0.1) 0%, rgba(255, 119, 198, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border-color: rgba(124, 127, 198, 0.3);
+        }
+        
+        .blog-card:hover::before {
+            opacity: 1;
+        }
+        
+        .blog-card[data-slug] {
+            cursor: pointer;
+        }
+        
+        .blog-card[data-slug]:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            border-color: rgba(124, 127, 198, 0.5);
+        }
+        
+        .blog-card-image {
+            width: 100%;
+            height: 240px;
+            background: var(--gradient-button);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.1) 0%, transparent 100%);
+        }
+        
+        .blog-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .blog-card-content {
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .blog-card-category {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2);
+            color: #6366f1;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .blog-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .blog-card-excerpt {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .blog-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        .blog-card-date {
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .blog-card-views {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .blog-loading {
+            text-align: center;
+            padding: 80px 20px;
+            color: #7c7fc6;
+            font-size: 1.3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .blog-empty {
+            text-align: center;
+            padding: 80px 20px;
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .blog-empty-icon {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            opacity: 0.6;
+        }
+        
+        .blog-empty-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .blog-empty-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .blog-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: 60px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .blog-pagination button {
+            padding: 12px 18px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+        
+        .blog-pagination button:hover:not(:disabled) {
+            background: var(--gradient-button);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+        
+        .blog-pagination button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        .blog-pagination button.active {
+            background: var(--gradient-button);
+            color: white;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+        }
+        
+        .blog-error {
+            text-align: center;
+            padding: 80px 20px;
+            color: #ff6b6b;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .blog-error-icon {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            opacity: 0.8;
+        }
+        
+        .blog-error-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .blog-error-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Force tous les titres en blanc sans dégradé */
+        h1, h2, h3, h4, h5, h6 {
+            background: none !important;
+            -webkit-background-clip: initial !important;
+            background-clip: initial !important;
+            -webkit-text-fill-color: initial !important;
+            color: #ffffff !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .blog-section {
+                padding: 60px 0;
+            }
+            
+            .blog-title {
+                font-size: 2.8rem;
+            }
+            
+            .blog-subtitle {
+                font-size: 1.1rem;
+                padding: 0 20px;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 0 15px;
+            }
+            
+            .blog-filters {
+                gap: 10px;
+                padding: 0 20px;
+            }
+            
+            .filter-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .blog-card-content {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .blog-title {
+                font-size: 2.2rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .blog-card-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <img src="images/logos/logonavbar.png" alt="Lucca - Agence Web" class="logo-icon" width="80" height="80">
+                    <div class="logo-text">
+                    </div>
+                </a>
+                
+                <nav class="nav">
+                    <div class="nav-overlay"></div>
+                    <button class="nav-toggle" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="estimer-mes-besoins.html" class="nav-link">ESTIMER MES BESOINS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="blog.html" class="nav-link active">BLOG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">CONTACT</a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <a href="contact.html" class="cta-button">NOUS CONTACTER</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="blog-header">
+                <h1 class="blog-title">📖 Notre Blog</h1>
+                <p class="blog-subtitle">
+                    Découvrez nos articles, conseils et actualités sur le développement web, 
+                    le design et les tendances digitales.
+                </p>
+            </div>
+
+            <!-- Filtres par catégorie -->
+            <div class="blog-filters" id="categoryFilters">
+                <button class="filter-btn active" data-category="">Tous les articles</button>
+            </div>
+
+            <!-- Zone de chargement -->
+            <div class="blog-loading" id="loading">
+                <div>🔄 Chargement des articles...</div>
+            </div>
+
+            <!-- Grille des articles -->
+            <div class="blog-grid" id="articlesGrid" style="display: none;">
+                <!-- Articles générés par JavaScript -->
+            </div>
+
+            <!-- Message si aucun article -->
+            <div class="blog-empty" id="noArticles" style="display: none;">
+                <div class="blog-empty-icon">📝</div>
+                <div class="blog-empty-title">Aucun article publié</div>
+                <div class="blog-empty-text">
+                    Nous préparons du contenu passionnant pour vous !<br>
+                    Revenez bientôt pour découvrir nos premiers articles.
+                </div>
+            </div>
+
+            <!-- Message d'erreur -->
+            <div class="blog-error" id="errorMessage" style="display: none;">
+                <div class="blog-error-icon">⚠️</div>
+                <div class="blog-error-title">Erreur de chargement</div>
+                <div class="blog-error-text" id="errorText">
+                    Impossible de charger les articles pour le moment.
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="blog-pagination" id="pagination" style="display: none;">
+                <!-- Pagination générée par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Configuration API - Modifiez cette URL selon votre environnement
+        const API_BASE = 'http://localhost:3000/api';
+        
+        // État de l'application
+        let currentPage = 1;
+        let currentCategory = '';
+        let articles = [];
+        let categories = [];
+        
+        // Utilitaires
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('fr-FR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+        
+        function formatNumber(num) {
+            return new Intl.NumberFormat('fr-FR').format(num);
+        }
+        
+        // Chargement des catégories
+        async function loadCategories() {
+            try {
+                const response = await fetch(`${API_BASE}/categories`);
+                if (response.ok) {
+                    const data = await response.json();
+                    categories = data.success ? data.data : data;
+                    renderCategoryFilters();
+                }
+            } catch (error) {
+                console.error('Erreur chargement catégories:', error);
+            }
+        }
+        
+        // Rendu des filtres de catégories
+        function renderCategoryFilters() {
+            const container = document.getElementById('categoryFilters');
+            const buttonsHTML = categories.map(cat => 
+                `<button class="filter-btn" data-category="${cat.id}" style="border-color: ${cat.color}; --hover-bg: ${cat.color}">
+                    ${cat.name}
+                </button>`
+            ).join('');
+            
+            container.innerHTML = `
+                <button class="filter-btn active" data-category="">Tous les articles</button>
+                ${buttonsHTML}
+            `;
+            
+            // Event listeners pour les filtres
+            container.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentCategory = btn.dataset.category;
+                    currentPage = 1;
+                    loadArticles();
+                });
+            });
+        }
+        
+        // Chargement des articles
+        async function loadArticles() {
+            try {
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('articlesGrid').style.display = 'none';
+                document.getElementById('noArticles').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'none';
+                document.getElementById('pagination').style.display = 'none';
+                
+                const params = new URLSearchParams({
+                    page: currentPage,
+                    limit: 6,
+                    status: 'published'
+                });
+                
+                if (currentCategory) {
+                    params.append('category', currentCategory);
+                }
+                
+                const response = await fetch(`${API_BASE}/articles?${params}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const result = data.success ? data.data : data;
+                    
+                    articles = result.articles || [];
+                    
+                    document.getElementById('loading').style.display = 'none';
+                    
+                    if (articles.length === 0) {
+                        document.getElementById('noArticles').style.display = 'block';
+                    } else {
+                        renderArticles();
+                        if (result.pagination && result.pagination.totalPages > 1) {
+                            renderPagination(result.pagination);
+                        }
+                    }
+                } else {
+                    throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+                }
+                
+            } catch (error) {
+                console.error('Erreur chargement articles:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'block';
+                
+                // Message d'erreur adaptatif
+                if (error.message.includes('Failed to fetch')) {
+                    document.getElementById('errorText').innerHTML = `
+                        Le serveur API n'est pas accessible.<br>
+                        <small>Vérifiez que le serveur est démarré sur localhost:3000</small>
+                    `;
+                } else {
+                    document.getElementById('errorText').textContent = error.message;
+                }
+            }
+        }
+        
+        // Rendu des articles
+        function renderArticles() {
+            const grid = document.getElementById('articlesGrid');
+            
+            grid.innerHTML = articles.map(article => `
+                <article class="blog-card" data-slug="${article.slug}" style="cursor: pointer;">
+                    <div class="blog-card-image">
+                        ${article.featured_image ? 
+                            `<img src="${article.featured_image}" alt="${article.title}">` : 
+                            '📄'
+                        }
+                    </div>
+                    <div class="blog-card-content">
+                        ${article.category_name ? 
+                            `<span class="blog-card-category" style="background-color: ${article.category_color}20; color: ${article.category_color}">
+                                ${article.category_name}
+                            </span>` : ''
+                        }
+                        <h2 class="blog-card-title">${article.title}</h2>
+                        <p class="blog-card-excerpt">
+                            ${article.excerpt || (article.content ? article.content.replace(/<[^>]*>/g, '').substring(0, 150) + '...' : 'Pas de résumé disponible')}
+                        </p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date">${formatDate(article.created_at)}</span>
+                            <span class="blog-card-views">👁️ ${formatNumber(article.views || 0)}</span>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+            
+            // Ajouter les event listeners pour les clics sur les articles
+            grid.querySelectorAll('.blog-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const slug = card.dataset.slug;
+                    if (slug) {
+                        window.location.href = `http://localhost:3000/article/${slug}`;
+                    }
+                });
+            });
+            
+            grid.style.display = 'grid';
+        }
+        
+        // Rendu de la pagination
+        function renderPagination(pagination) {
+            const container = document.getElementById('pagination');
+            const { currentPage: page, totalPages } = pagination;
+            
+            let buttonsHTML = `
+                <button ${page === 1 ? 'disabled' : ''} data-page="${page - 1}">
+                    ← Précédent
+                </button>
+            `;
+            
+            // Pages visibles
+            const startPage = Math.max(1, page - 2);
+            const endPage = Math.min(totalPages, page + 2);
+            
+            for (let i = startPage; i <= endPage; i++) {
+                buttonsHTML += `
+                    <button class="${i === page ? 'active' : ''}" data-page="${i}">
+                        ${i}
+                    </button>
+                `;
+            }
+            
+            buttonsHTML += `
+                <button ${page === totalPages ? 'disabled' : ''} data-page="${page + 1}">
+                    Suivant →
+                </button>
+            `;
+            
+            container.innerHTML = buttonsHTML;
+            container.style.display = 'flex';
+            
+            // Ajouter les event listeners
+            container.querySelectorAll('button:not([disabled])').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const page = parseInt(btn.dataset.page);
+                    if (page && page !== currentPage) {
+                        changePage(page);
+                    }
+                });
+            });
+        }
+        
+        // Changement de page
+        function changePage(page) {
+            currentPage = page;
+            loadArticles();
+            document.querySelector('.blog-section').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCategories();
+            loadArticles();
+        });
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -34,7 +34,7 @@ const app = express();
 //     }
 // }));
 
-app.use(cors());
+// app.use(cors()); // Temporairement désactivé
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
@@ -80,14 +80,56 @@ app.get('/api', (req, res) => {
     });
 });
 
-// Route racine - Interface d'administration
+// Route racine - Site principal
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Routes pour le site principal
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'contact.html'));
+});
+
+app.get('/blog', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'blog.html'));
+});
+
+app.get('/services', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'services.html'));
+});
+
+app.get('/services-identite', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'services-identite.html'));
+});
+
+app.get('/services-sur-mesure', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'services-sur-mesure.html'));
+});
+
+app.get('/qui-sommes-nous', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'qui-sommes-nous.html'));
+});
+
+app.get('/cas-etudes', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'cas-etudes.html'));
+});
+
+app.get('/avis', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'avis.html'));
+});
+
+app.get('/estimer-mes-besoins', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'estimer-mes-besoins.html'));
 });
 
 // Route pour afficher un article
 app.get('/article/:slug', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'article.html'));
+});
+
+// Interface d'administration
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 // Health check
@@ -130,7 +172,7 @@ app.get('/api/docs', (req, res) => {
     });
 });
 
-// Route par défaut pour l'interface d'administration
+// Route par défaut pour le site principal
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });

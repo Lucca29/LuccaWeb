@@ -3,659 +3,456 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Blog - Agence Lucca</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css">
+    <title>Lucca - Créé en Bretagne, visible partout</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Sidebar -->
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="logo">
-                <i class="fas fa-blog"></i>
-                <span>Blog Admin</span>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <img src="images/logos/logonavbar.png" alt="Lucca - Agence Web" class="logo-icon" width="80" height="80">
+                    <div class="logo-text">
+                    </div>
+                </a>
+                
+                <nav class="nav">
+                    <div class="nav-overlay"></div>
+                    <button class="nav-toggle" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="estimer-mes-besoins.html" class="nav-link">ESTIMER MES BESOINS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="blog.html" class="nav-link">BLOG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">CONTACT</a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <a href="contact.html" class="cta-button">NOUS CONTACTER</a>
             </div>
-            <button class="sidebar-toggle" id="sidebarToggle">
-                <i class="fas fa-bars"></i>
-            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Créé en Bretagne, visible partout</h1>
+                <a href="contact.html" class="hero-cta">DEMANDER UN DEVIS GRATUIT</a>
+                <p class="hero-subtitle">
+                    Créez votre présence en ligne avec &lt;Lucca&gt;<br>
+                    Des sites web modernes et abordables qui attirent vos clients
+                </p>
+            </div>
         </div>
         
-        <ul class="sidebar-menu">
-            <li class="menu-item active" data-page="dashboard">
-                <a href="#dashboard">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="menu-item" data-page="articles">
-                <a href="#articles">
-                    <i class="fas fa-newspaper"></i>
-                    <span>Articles</span>
-                    <span class="badge" id="articleCount">0</span>
-                </a>
-            </li>
-            <li class="menu-item" data-page="new-article">
-                <a href="#new-article">
-                    <i class="fas fa-plus-circle"></i>
-                    <span>Nouvel Article</span>
-                </a>
-            </li>
-            <li class="menu-item" data-page="categories">
-                <a href="#categories">
-                    <i class="fas fa-tags"></i>
-                    <span>Catégories</span>
-                </a>
-            </li>
-            <li class="menu-item" data-page="statistics">
-                <a href="#statistics">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Statistiques</span>
-                </a>
-            </li>
-            <li class="menu-item" data-page="media">
-                <a href="#media">
-                    <i class="fas fa-images"></i>
-                    <span>Médias</span>
-                </a>
-            </li>
-        </ul>
-        
-        <div class="sidebar-footer">
-            <div class="user-info">
-                <div class="user-avatar">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="user-details">
-                    <span class="user-name" id="userName">Admin</span>
-                    <span class="user-role">Administrateur</span>
-                </div>
-            </div>
-            <button class="logout-btn" id="logoutBtn">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Déconnexion</span>
-            </button>
+        <!-- Background effects -->
+        <div class="bg-effects">
+            <div class="bg-blur bg-blur-1"></div>
+            <div class="bg-blur bg-blur-2"></div>
+            <div class="bg-blur bg-blur-3"></div>
+            <div class="bg-blur bg-blur-4"></div>
         </div>
-    </nav>
+    </section>
 
-    <!-- Main Content -->
-    <main class="main-content" id="mainContent">
-        <!-- Header -->
-        <header class="top-header">
-            <div class="header-left">
-                <button class="mobile-toggle" id="mobileToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <h1 id="pageTitle">Dashboard</h1>
-            </div>
-            <div class="header-right">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Rechercher..." id="globalSearch">
+    <!-- Partners Section -->
+    <section class="partners">
+        <div class="container">
+            <div class="partners-grid">
+                <div class="partner-logo">
+                    <svg class="html-logo" width="32" height="32" viewBox="0 0 384 512" fill="currentColor">
+                        <path d="M0 32l34.9 395.8L192 480l157.1-52.2L384 32H0zm308.2 127.9H124.4l4.1 49.4h175.6l-13.6 148.4-97.9 27v0.3h-1.1l-98.7-27.3-6.7-75.8h47.7L138 320l53.5 14.5 53.7-14.5 6.2-64.2H84.3L71.5 112.2h241.1l-4.4 47.7z"/>
+                    </svg>
+                    <span>HTML</span>
                 </div>
-                <div class="header-actions">
-                    <button class="action-btn" id="refreshBtn" title="Actualiser">
-                        <i class="fas fa-sync-alt"></i>
+                <div class="partner-logo">
+                    <svg class="css-logo" width="32" height="32" viewBox="0 0 384 512" fill="currentColor">
+                        <path d="M0 32l34.9 395.8L192 480l157.1-52.2L384 32H0zm313.1 80l-4.8 47.3L193 208.6l-.3.1h111.5l-12.8 146.6-98.2 28.7-98.8-29.2-6.4-73.9h48.9l3.2 38.3 52.6 13.3 54.7-15.4 3.7-61.6-166.3-.5v-.1l-.2.1-3.6-46.3L193.1 162l.8-.2v-.6h-50l-5.3-48.6H76.1l-.7.2 4.7-45.5H313.1z"/>
+                    </svg>
+                    <span>CSS</span>
+                </div>
+                <div class="partner-logo">
+                    <svg class="js-logo" width="32" height="32" viewBox="0 0 448 512" fill="currentColor">
+                        <path d="M0 32v448h448V32H0zm243.8 349.4c0 43.6-25.6 63.5-62.9 63.5-33.7 0-53.2-17.4-63.2-38.5l34.3-20.7c6.6 11.7 12.6 21.6 27.1 21.6 13.8 0 22.6-5.4 22.6-26.5V237.7h42.1v143.7zm99.6 63.5c-39.1 0-64.4-18.6-76.7-43l34.3-19.8c9 14.7 20.8 25.6 41.5 25.6 17.4 0 28.6-8.7 28.6-20.8 0-14.4-11.4-19.5-30.7-28l-10.5-4.5c-30.4-12.9-50.5-29.2-50.5-63.5 0-31.6 24.1-55.6 61.6-55.6 26.8 0 46 9.3 59.8 33.7L368 290c-7.2-12.9-15-18-27.1-18-12.3 0-20.1 7.8-20.1 18 0 12.6 7.8 17.7 25.9 25.6l10.5 4.5c35.8 15.3 55.9 31 55.9 66.2 0 37.8-29.8 58.6-69.7 58.6z"/>
+                    </svg>
+                    <span>JavaScript</span>
+                </div>
+                <div class="partner-logo">
+                    <svg class="seo-logo" width="32" height="32" viewBox="0 0 512 512" fill="currentColor">
+                        <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM288 176c0-44.2-35.8-80-80-80s-80 35.8-80 80c0 48.8 46.5 111.6 68.6 138.6c6 7.3 16.8 7.3 22.7 0c22.1-27 68.7-89.8 68.7-138.6zm-112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/>
+                    </svg>
+                    <span>SEO</span>
+                </div>
+                <div class="partner-logo">
+                    <svg class="hosting-logo" width="32" height="32" viewBox="0 0 512 512" fill="currentColor">
+                        <path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm88 64v64H120V96h32zm0 96v64H120V192h32zm0 96v64H120V288h32zM360 96v64H328V96h32zm0 96v64H328V192h32zm0 96v64H328V288h32zM232 96v64H200V96h32zm0 96v64H200V192h32zm0 96v64H200V288h32z"/>
+                    </svg>
+                    <span>Hébergement</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Lucca Section -->
+    <section class="why-lucca">
+        <div class="container">
+            <h2 class="section-title">POURQUOI LUCCA ?</h2>
+            
+            <div class="why-lucca-content">
+                <div class="why-lucca-text">
+                    <h3 class="why-lucca-headline">
+                        Vous avez besoin de plus qu'un joli design - 
+                        vous avez besoin de résultats
+                    </h3>
+                    <p class="why-lucca-description">
+                        Lucca vous aide à développer votre présence en ligne 
+                        avec des sites web qui convertissent vraiment
+                    </p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">+10</div>
+                        <div class="stat-label">années d'expérience</div>
+                        <div class="stat-sublabel">dans le développement web</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number">98.5%</div>
+                        <div class="stat-label">Satisfaction client</div>
+                        <div class="stat-sublabel">basée sur nos avis</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number">48h</div>
+                        <div class="stat-label">Délai de réponse</div>
+                        <div class="stat-sublabel">Support rapide garanti</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">NOS SERVICES</h2>
+            
+            <div class="services-intro">
+                <h3 class="services-headline">
+                    Nous aidons les entreprises locales à prospérer grâce à des sites web modernes et des solutions numériques sur mesure
+                </h3>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card service-web">
+                    <div class="service-content">
+                        <h4 class="service-title">Développement Web</h4>
+                        <p class="service-description">
+                            Alliant harmonieusement forme et fonction, nous créons des sites web qui vous aident à vendre.
+                        </p>
+                    </div>
+                    <div class="service-visual">
+                        <div class="browser-mockup">
+                            <div class="browser-bar">
+                                <div class="browser-controls">
+                                    <span class="control red"></span>
+                                    <span class="control yellow"></span>
+                                    <span class="control green"></span>
+                                </div>
+                                <div class="browser-url">
+                                    <span>https://votre-site.fr</span>
+                                </div>
+                            </div>
+                            <div class="browser-content">
+                                <div class="code-line">
+                                    <span class="code-tag">&lt;header&gt;</span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="code-indent">  &lt;nav&gt;</span>
+                                </div>
+                                <div class="code-line">
+                                    <span class="code-indent">    &lt;ul&gt;</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card service-design">
+                    <div class="service-content">
+                        <h4 class="service-title">Design graphique percutant</h4>
+                        <p class="service-description">
+                            Donnez vie à votre marque avec des visuels qui captent l'attention et inspirent l'action.
+                        </p>
+                    </div>
+                    <div class="service-visual">
+                        <div class="service-image">
+                            <img src="images/logos/1.png" alt="Design graphique - Icônes de réseaux sociaux" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card service-ux">
+                    <div class="service-content">
+                        <h4 class="service-title">Design UX/UI</h4>
+                        <p class="service-description">
+                            Conçus en pensant à votre audience, nos designs touchent et convertissent.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="service-card service-automation">
+                    <div class="service-content">
+                        <h4 class="service-title">Adapté à votre image</h4>
+                        <p class="service-description">
+                            Nous nous basons sur votre charte graphique pour créer un site web qui vous ressemble.
+                        </p>
+                    </div>
+                    <div class="service-visual">
+                        <div class="service-image">
+                            <img src="images/logos/2.png" alt="Automatisation No-Code - Diagramme de flux" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio">
+        <div class="container">
+            <h2 class="section-title">NOS RÉALISATIONS</h2>
+            
+            <div class="portfolio-intro">
+                <h3 class="portfolio-headline">
+                    Créé avec passion
+                </h3>
+                <p class="portfolio-description">
+                    Découvrez quelques-unes de nos créations qui ont aidé nos clients à développer leur présence en ligne et à atteindre leurs objectifs.
+                </p>
+            </div>
+            
+            <div class="portfolio-carousel">
+                <div class="portfolio-track">
+                    <div class="portfolio-slide active">
+                        <div class="portfolio-item">
+                            <img src="images/Projets/Milesio/site.gif" alt="Milésio - Application de gestion kilométrage" />
+                            <div class="platform-indicator">
+                                <button class="platform-btn active">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"/>
+                                    </svg>
+                                    Desktop
+                                </button>
+                            </div>
+                            <div class="portfolio-overlay">
+                                <h4 class="portfolio-title">Milésio</h4>
+                                <p class="portfolio-category">Application IOS de Gestion Des Kilomètres
+                                    
+                                </p>
+                                <a href="https://milesio.fr/" target="_blank" class="portfolio-link">Voir le projet</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-slide">
+                        <div class="portfolio-item">
+                            <img src="images/Projets/Anarya/site.gif" alt="Anarya - Serveur Minecraft" />
+                            <div class="platform-indicator">
+                                <button class="platform-btn active">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"/>
+                                    </svg>
+                                    Desktop
+                                </button>
+                            </div>
+                            <div class="portfolio-overlay">
+                                <h4 class="portfolio-title">Anarya</h4>
+                                <p class="portfolio-category">Site Web Gaming</p>
+                                <a href="https://anaryamc.fr/" target="_blank" class="portfolio-link">Voir le projet</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="portfolio-slide">
+                        <div class="portfolio-item portfolio-responsive">
+                            <div class="responsive-display-area">
+                                <div class="version-container desktop-container active">
+                                    <img src="images/Projets/OVL/site.gif" alt="Au Vieux Logis - Version desktop" />
+                                </div>
+                                <div class="version-container mobile-container">
+                                    <div class="mobile-frame">
+                                        <video src="images/Projets/OVL/mobile.mp4" alt="Au Vieux Logis - Version mobile" autoplay muted loop playsinline></video>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="version-selector">
+                                <button class="version-btn active" data-version="desktop">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"/>
+                                    </svg>
+                                    Desktop
+                                </button>
+                                <button class="version-btn" data-version="mobile">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M17 2H7c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM7 4h10v12H7V4z"/>
+                                    </svg>
+                                    Mobile
+                                </button>
+                            </div>
+                            <div class="portfolio-overlay">
+                                <h4 class="portfolio-title">Au Vieux Logis</h4>
+                                <p class="portfolio-category">Site Vitrine Responsive</p>
+                                <a href="http://auvieuxlogis.fr/" target="_blank" class="portfolio-link">Voir le projet</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-slide">
+                        <div class="portfolio-item">
+                            <img src="images/Projets/AOV/desktop.gif" alt="Action ou Vérité - Jeu interactif" />
+                            <div class="platform-indicator">
+                                <button class="platform-btn active">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"/>
+                                    </svg>
+                                    Desktop
+                                </button>
+                            </div>
+                            <div class="portfolio-overlay">
+                                <h4 class="portfolio-title">Action ou Vérité</h4>
+                                <p class="portfolio-category">Jeu Interactif Web</p>
+                                <a href="https://actionouverite.fr/" target="_blank" class="portfolio-link">Voir le projet</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                
+                <div class="portfolio-navigation">
+                    <button class="portfolio-nav portfolio-prev" aria-label="Projet précédent">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </button>
-                    <button class="action-btn" id="settingsBtn" title="Paramètres">
-                        <i class="fas fa-cog"></i>
+                    <button class="portfolio-nav portfolio-next" aria-label="Projet suivant">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </button>
                 </div>
+                
+                <div class="portfolio-indicators">
+                    <button class="portfolio-indicator active" data-slide="0"></button>
+                    <button class="portfolio-indicator" data-slide="1"></button>
+                    <button class="portfolio-indicator" data-slide="2"></button>
+                    <button class="portfolio-indicator" data-slide="3"></button>
+                </div>
             </div>
-        </header>
+        </div>
+    </section>
 
-        <!-- Page Content -->
-        <div class="page-container">
-            <!-- Dashboard Page -->
-            <div class="page active" id="dashboard-page">
-                <div class="dashboard-grid">
-                    <!-- Stats Cards -->
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-icon blue">
-                                <i class="fas fa-newspaper"></i>
-                            </div>
-                            <div class="stat-content">
-                                <div class="stat-number" id="totalArticles">0</div>
-                                <div class="stat-label">Articles Total</div>
-                            </div>
-                        </div>
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">NOS PACKS</h2>
+            
+            <div class="pricing-intro">
+                <h3 class="pricing-headline">
+                    Des solutions sur mesure pour votre succès en ligne
+                </h3>
+                <p class="pricing-description">
+                    Choisissez le pack qui correspond le mieux à vos besoins et objectifs. Chaque pack est conçu pour maximiser votre impact en ligne et garantir votre satisfaction.
+                </p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-card-content">
+                        <div class="pricing-badge">IDÉAL POUR DÉMARRER</div>
+                        <h4 class="pricing-title">Pack Standard</h4>
                         
-                        <div class="stat-card">
-                            <div class="stat-icon green">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <div class="stat-content">
-                                <div class="stat-number" id="totalViews">0</div>
-                                <div class="stat-label">Vues Total</div>
-                            </div>
+                        <div class="pricing-price">
+                            <span class="price-current">999€</span>
+                            <span class="price-old">1258€</span>
                         </div>
+                        <div class="pricing-savings">Économisez 259€</div>
                         
-                        <div class="stat-card">
-                            <div class="stat-icon orange">
-                                <i class="fas fa-file-alt"></i>
+                        <p class="pricing-subtitle">
+                            La solution parfaite pour établir votre présence en ligne avec impact
+                        </p>
+                    </div>
+                    <button class="pricing-button"><span>En savoir plus</span></button>
+                </div>
+                
+                <div class="pricing-card pricing-featured" id="medium-pack">
+                    <!-- Vue normale -->
+                    <div class="pack-normal-view">
+                        <div class="pricing-card-content">
+                            <div class="pricing-badge">PLUS POPULAIRE</div>
+                            <h4 class="pricing-title">Pack Medium</h4>
+                            
+                            <div class="pricing-price">
+                                <span class="price-current">2499€</span>
+                                <span class="price-old">3034€</span>
                             </div>
-                            <div class="stat-content">
-                                <div class="stat-number" id="publishedArticles">0</div>
-                                <div class="stat-label">Publiés</div>
-                            </div>
+                            <div class="pricing-savings">Économisez 535€</div>
+                            
+                            <p class="pricing-subtitle">
+                                La solution complète pour une présence web professionnelle et performante
+                            </p>
                         </div>
+                        <button class="pricing-button" onclick="showPackDetails()"><span>En savoir plus</span></button>
+                    </div>
+                    
+                    <!-- Vue détails -->
+                    <div class="pack-details-view" style="display: none;">
+                        <button class="back-button" onclick="hidePackDetails()">← Retour</button>
+                        <h4 class="pricing-title">Pack Medium - Détails</h4>
                         
-                        <div class="stat-card">
-                            <div class="stat-icon purple">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                            <div class="stat-content">
-                                <div class="stat-number" id="draftArticles">0</div>
-                                <div class="stat-label">Brouillons</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Quick Actions -->
-                    <div class="quick-actions">
-                        <h3>Actions Rapides</h3>
-                        <div class="action-buttons">
-                            <button class="quick-btn" data-page="new-article">
-                                <i class="fas fa-plus"></i>
-                                Nouvel Article
-                            </button>
-                            <button class="quick-btn" data-page="categories">
-                                <i class="fas fa-tags"></i>
-                                Gérer Catégories
-                            </button>
-                            <button class="quick-btn" data-page="media">
-                                <i class="fas fa-upload"></i>
-                                Upload Média
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Recent Articles -->
-                    <div class="recent-articles">
-                        <h3>Articles Récents</h3>
-                        <div class="articles-list" id="recentArticlesList">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
-
-                    <!-- Popular Articles -->
-                    <div class="popular-articles">
-                        <h3>Articles Populaires</h3>
-                        <div class="articles-list" id="popularArticlesList">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Articles Page -->
-            <div class="page" id="articles-page">
-                <div class="page-header">
-                    <h2>Gestion des Articles</h2>
-                    <div class="page-actions">
-                        <button class="btn primary" data-page="new-article">
-                            <i class="fas fa-plus"></i>
-                            Nouvel Article
-                        </button>
+                        <ul class="pricing-features">
+                            <li>Site Multi-pages Premium (jusqu'à 4 pages)</li>
+                            <li>Shooting Photo Professionnel - Sur place</li>
+                            <li>Design Responsive Mobile Optimisé - Parfait sur tous les écrans</li>
+                            <li>Hébergement Premium 1 An Offert - Valeur de 180€</li>
+                            <li>Galerie Photo Interactive - Mise en valeur dynamique</li>
+                        </ul>
                     </div>
                 </div>
                 
-                <div class="content-section">
-                    <div class="filters">
-                        <select id="statusFilter">
-                            <option value="">Tous les statuts</option>
-                            <option value="published">Publiés</option>
-                            <option value="draft">Brouillons</option>
-                        </select>
-                        <select id="categoryFilter">
-                            <option value="">Toutes les catégories</option>
-                        </select>
-                        <input type="text" id="searchArticles" placeholder="Rechercher des articles...">
-                    </div>
-                    
-                    <div class="articles-table" id="articlesTable">
-                        <!-- Populated by JS -->
-                    </div>
-                    
-                    <div class="pagination" id="articlesPagination">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- New Article Page -->
-            <div class="page" id="new-article-page">
-                <div class="page-header">
-                    <h2 id="articleFormTitle">Nouvel Article</h2>
-                    <div class="page-actions">
-                        <button class="btn secondary" id="saveAsDraft">
-                            <i class="fas fa-save"></i>
-                            Sauvegarder en brouillon
-                        </button>
-                        <button class="btn primary" id="publishArticle">
-                            <i class="fas fa-upload"></i>
-                            Publier
-                        </button>
-                    </div>
-                </div>
-                
-                <form class="article-form" id="articleForm">
-                    <input type="hidden" id="articleId">
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="articleTitle">Titre *</label>
-                            <input type="text" id="articleTitle" required>
+                <div class="pricing-card pricing-premium">
+                    <div class="pricing-card-content">
+                        <h4 class="pricing-title">Pack Premium</h4>
+                        
+                        <div class="pricing-price">
+                            <span class="price-current price-gradient">Sur Mesure</span>
                         </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="articleSlug">Slug (URL)</label>
-                            <input type="text" id="articleSlug" placeholder="Généré automatiquement">
-                        </div>
-                    </div>
-
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="articleExcerpt">Résumé</label>
-                            <textarea id="articleExcerpt" rows="3" placeholder="Court résumé de l'article..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group half">
-                            <label for="articleCategory">Catégorie</label>
-                            <select id="articleCategory">
-                                <!-- Populated by JS -->
-                            </select>
-                        </div>
-                        <div class="form-group half">
-                            <label for="articleTags">Tags</label>
-                            <input type="text" id="articleTags" placeholder="tag1, tag2, tag3">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="featuredImage">Image à la une</label>
-                            <div class="image-upload" id="imageUpload">
-                                <input type="file" id="featuredImage" accept="image/*">
-                                <div class="upload-placeholder">
-                                    <i class="fas fa-image"></i>
-                                    <span>Cliquez pour sélectionner une image</span>
-                                </div>
-                                <div class="image-preview" id="imagePreview" style="display: none;">
-                                    <img id="previewImg" src="" alt="">
-                                    <button type="button" class="remove-image" id="removeImage">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="articleContent">Contenu *</label>
-                            <div class="editor-toolbar">
-                                <button type="button" class="editor-btn" data-action="bold">
-                                    <i class="fas fa-bold"></i>
-                                </button>
-                                <button type="button" class="editor-btn" data-action="italic">
-                                    <i class="fas fa-italic"></i>
-                                </button>
-                                <button type="button" class="editor-btn" data-action="insertUnorderedList">
-                                    <i class="fas fa-list-ul"></i>
-                                </button>
-                                <button type="button" class="editor-btn" data-action="insertOrderedList">
-                                    <i class="fas fa-list-ol"></i>
-                                </button>
-                                <button type="button" class="editor-btn" data-action="createLink">
-                                    <i class="fas fa-link"></i>
-                                </button>
-                                
-                                <div class="toolbar-separator"></div>
-                                
-                                <select class="heading-select" id="headingSelect">
-                                    <option value="">Titre...</option>
-                                    <option value="h1">Titre H1</option>
-                                    <option value="h2">Titre H2</option>
-                                    <option value="h3">Titre H3</option>
-                                    <option value="h4">Titre H4</option>
-                                    <option value="h5">Titre H5</option>
-                                    <option value="h6">Titre H6</option>
-                                    <option value="p">Paragraphe normal</option>
-                                </select>
-                            </div>
-                            <div class="content-editor" id="articleContent" contenteditable="true">
-                                Écrivez votre article ici...
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- SEO Section -->
-                    <div class="seo-section">
-                        <h3>Optimisation SEO</h3>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="metaTitle">Meta Titre</label>
-                                <input type="text" id="metaTitle" maxlength="60">
-                                <small class="char-count">0/60 caractères</small>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="metaDescription">Meta Description</label>
-                                <textarea id="metaDescription" rows="2" maxlength="160"></textarea>
-                                <small class="char-count">0/160 caractères</small>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Categories Page -->
-            <div class="page" id="categories-page">
-                <div class="page-header">
-                    <h2>Gestion des Catégories</h2>
-                    <div class="page-actions">
-                        <button class="btn primary" id="addCategoryBtn">
-                            <i class="fas fa-plus"></i>
-                            Nouvelle Catégorie
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="content-section">
-                    <div class="categories-grid" id="categoriesGrid">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Statistics Page -->
-            <div class="page" id="statistics-page">
-                <div class="page-header">
-                    <h2>Statistiques Détaillées</h2>
-                    <div class="page-actions">
-                        <button class="btn secondary" id="exportStatsBtn">
-                            <i class="fas fa-download"></i>
-                            Exporter
-                        </button>
-                        <button class="btn primary" id="refreshStatsBtn">
-                            <i class="fas fa-sync-alt"></i>
-                            Actualiser
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="content-section">
-                    <!-- Period Selector -->
-                    <div class="stats-filters">
-                        <div class="period-selector">
-                            <button class="period-btn active" data-period="7">7 jours</button>
-                            <button class="period-btn" data-period="30">30 jours</button>
-                            <button class="period-btn" data-period="90">3 mois</button>
-                            <button class="period-btn" data-period="365">1 an</button>
-                        </div>
-                        <div class="date-range">
-                            <input type="date" id="statsDateFrom">
-                            <span>à</span>
-                            <input type="date" id="statsDateTo">
-                        </div>
-                    </div>
-
-                    <!-- Overview Stats -->
-                    <div class="stats-overview">
-                        <div class="stat-card-large">
-                            <div class="stat-header">
-                                <h3>Vue d'ensemble</h3>
-                                <i class="fas fa-globe"></i>
-                            </div>
-                            <div class="stat-grid">
-                                <div class="stat-item">
-                                    <span class="stat-value" id="statsTotal">0</span>
-                                    <span class="stat-label">Articles total</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-value" id="statsViews">0</span>
-                                    <span class="stat-label">Vues totales</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-value" id="statsAvgViews">0</span>
-                                    <span class="stat-label">Vues/Article</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-value" id="statsPublished">0</span>
-                                    <span class="stat-label">Publiés</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Charts Grid -->
-                    <div class="charts-grid">
-                        <!-- Article Views Chart -->
-                        <div class="chart-card">
-                            <div class="chart-header">
-                                <h3>Évolution des vues</h3>
-                                <select id="viewsChartType">
-                                    <option value="daily">Par jour</option>
-                                    <option value="weekly">Par semaine</option>
-                                    <option value="monthly">Par mois</option>
-                                </select>
-                            </div>
-                            <div class="chart-container">
-                                <canvas id="viewsChart"></canvas>
-                            </div>
-                        </div>
-
-                        <!-- Articles by Category -->
-                        <div class="chart-card">
-                            <div class="chart-header">
-                                <h3>Articles par catégorie</h3>
-                            </div>
-                            <div class="chart-container">
-                                <canvas id="categoryChart"></canvas>
-                            </div>
-                        </div>
-
-                        <!-- Publishing Activity -->
-                        <div class="chart-card">
-                            <div class="chart-header">
-                                <h3>Activité de publication</h3>
-                            </div>
-                            <div class="chart-container">
-                                <canvas id="publishingChart"></canvas>
-                            </div>
-                        </div>
-
-                        <!-- Top Articles -->
-                        <div class="chart-card">
-                            <div class="chart-header">
-                                <h3>Articles les plus consultés</h3>
-                            </div>
-                            <div class="top-articles-list" id="topArticlesList">
-                                <!-- Populated by JS -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Detailed Stats -->
-                    <div class="detailed-stats">
-                        <!-- Performance Metrics -->
-                        <div class="stats-section">
-                            <h3>Métriques de Performance</h3>
-                            <div class="metrics-grid">
-                                <div class="metric-card">
-                                    <div class="metric-icon green">
-                                        <i class="fas fa-trending-up"></i>
-                                    </div>
-                                    <div class="metric-content">
-                                        <div class="metric-value" id="avgReadingTime">0 min</div>
-                                        <div class="metric-label">Temps de lecture moyen</div>
-                                        <div class="metric-change positive" id="readingTimeChange">+0%</div>
-                                    </div>
-                                </div>
-                                
-                                <div class="metric-card">
-                                    <div class="metric-icon blue">
-                                        <i class="fas fa-eye"></i>
-                                    </div>
-                                    <div class="metric-content">
-                                        <div class="metric-value" id="avgViewsPerDay">0</div>
-                                        <div class="metric-label">Vues par jour</div>
-                                        <div class="metric-change" id="viewsPerDayChange">+0%</div>
-                                    </div>
-                                </div>
-                                
-                                <div class="metric-card">
-                                    <div class="metric-icon orange">
-                                        <i class="fas fa-calendar-alt"></i>
-                                    </div>
-                                    <div class="metric-content">
-                                        <div class="metric-value" id="publishingFrequency">0/semaine</div>
-                                        <div class="metric-label">Fréquence publication</div>
-                                        <div class="metric-change" id="publishingFrequencyChange">+0%</div>
-                                    </div>
-                                </div>
-                                
-                                <div class="metric-card">
-                                    <div class="metric-icon purple">
-                                        <i class="fas fa-percentage"></i>
-                                    </div>
-                                    <div class="metric-content">
-                                        <div class="metric-value" id="draftRatio">0%</div>
-                                        <div class="metric-label">Ratio brouillons</div>
-                                        <div class="metric-change" id="draftRatioChange">+0%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Content Analysis -->
-                        <div class="stats-section">
-                            <h3>Analyse du Contenu</h3>
-                            <div class="content-analysis">
-                                <div class="analysis-item">
-                                    <span class="analysis-label">Longueur moyenne:</span>
-                                    <span class="analysis-value" id="avgWordCount">0 mots</span>
-                                </div>
-                                <div class="analysis-item">
-                                    <span class="analysis-label">Tags les plus utilisés:</span>
-                                    <div class="tags-cloud" id="popularTags">
-                                        <!-- Populated by JS -->
-                                    </div>
-                                </div>
-                                <div class="analysis-item">
-                                    <span class="analysis-label">Catégorie la plus active:</span>
-                                    <span class="analysis-value" id="mostActiveCategory">-</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Recent Activity -->
-                        <div class="stats-section">
-                            <h3>Activité Récente</h3>
-                            <div class="activity-timeline" id="activityTimeline">
-                                <!-- Populated by JS -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Media Page -->
-            <div class="page" id="media-page">
-                <div class="page-header">
-                    <h2>Médiathèque</h2>
-                    <div class="page-actions">
-                        <input type="file" id="mediaUpload" multiple accept="image/*" style="display: none;">
-                        <button class="btn primary" id="uploadMediaBtn">
-                            <i class="fas fa-upload"></i>
-                            Upload Images
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="content-section">
-                    <div class="media-grid" id="mediaGrid">
-                        <!-- Populated by JS -->
+                        <p class="pricing-contact">Contactez-nous pour un devis personnalisé</p>
+                        
+                        <p class="pricing-subtitle">
+                            La solution ultime pour maximiser votre présence en ligne et votre ROI
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
 
-    <!-- Modals -->
-    <!-- Login Modal -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Connexion Admin</h3>
-            </div>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="loginEmail">Email</label>
-                    <input type="email" id="loginEmail" name="loginEmail" required value="admin@agence-lucca.fr">
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">Mot de passe</label>
-                    <input type="password" id="loginPassword" name="loginPassword" required value="AdminLucca2024!">
-                </div>
-                <button type="submit" class="btn primary full-width">
-                    <i class="fas fa-sign-in-alt"></i>
-                    Se connecter
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Category Modal -->
-    <div class="modal" id="categoryModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="categoryModalTitle">Nouvelle Catégorie</h3>
-                <button class="modal-close" id="closeCategoryModal">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <form id="categoryForm">
-                <input type="hidden" id="categoryId">
-                <div class="form-group">
-                    <label for="categoryName">Nom *</label>
-                    <input type="text" id="categoryName" required>
-                </div>
-                <div class="form-group">
-                    <label for="categoryDescription">Description</label>
-                    <textarea id="categoryDescription" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="categoryColor">Couleur</label>
-                    <input type="color" id="categoryColor" value="#007bff">
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn secondary" id="cancelCategory">Annuler</button>
-                    <button type="submit" class="btn primary">Sauvegarder</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Toast Notifications -->
-    <div class="toast-container" id="toastContainer"></div>
-
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner">
-            <i class="fas fa-spinner fa-spin"></i>
-            <span>Chargement...</span>
-        </div>
-    </div>
-
-    <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html> 

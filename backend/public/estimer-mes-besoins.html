@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimer mes besoins - Lucca Agence Web</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <img src="images/logos/logonavbar.png" alt="Lucca - Agence Web" class="logo-icon" width="80" height="80">
+                    <div class="logo-text">
+                    </div>
+                </a>
+                
+                <nav class="nav">
+                    <div class="nav-overlay"></div>
+                    <button class="nav-toggle" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="estimer-mes-besoins.html" class="nav-link">ESTIMER MES BESOINS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="blog.html" class="nav-link">BLOG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">CONTACT</a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <a href="contact.html" class="cta-button">NOUS CONTACTER</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <section class="page-content">
+        <!-- Header fixe de l'estimateur -->
+        <div class="estimator-header-fixed">
+            <div class="container">
+                <div class="estimator-header">
+                    <h1>Estimez vos besoins</h1>
+                    <p>Répondez à quelques questions pour obtenir une estimation personnalisée</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">Étape 1 sur 8</span>
+                    
+                    <!-- Bulle de progression mobile -->
+                    <div class="mobile-progress-bubble" id="mobileBubble">
+                        <div class="bubble-fill" id="bubbleFill"></div>
+                        <span class="bubble-percentage" id="bubblePercentage">13%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenu de l'estimateur -->
+        <div class="container">
+            <div class="estimator-container">
+                <div class="estimator-content">
+                    <!-- Étape 1: Profil -->
+                    <div class="question-card active" id="step1">
+                        <h2>Quel est votre profil ?</h2>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="restaurateur">
+                                <div class="option-icon">🍽️</div>
+                                <span>Restaurateur</span>
+                            </button>
+                            <button class="option-btn" data-value="commercant">
+                                <div class="option-icon">🏪</div>
+                                <span>Commerçant</span>
+                            </button>
+                            <button class="option-btn" data-value="bar">
+                                <div class="option-icon">🍺</div>
+                                <span>Bar / PMU</span>
+                            </button>
+                            <button class="option-btn" data-value="autres">
+                                <div class="option-icon">💼</div>
+                                <span>Autres</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Message informatif -->
+                    <div class="info-message" id="infoMessage"></div>
+
+                    <!-- Étape 2: Site existant -->
+                    <div class="question-card" id="step2">
+                        <h2>Avez-vous déjà un site web ?</h2>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="oui">
+                                <div class="option-icon">✅</div>
+                                <span>Oui</span>
+                            </button>
+                            <button class="option-btn" data-value="non">
+                                <div class="option-icon">❌</div>
+                                <span>Non</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Étape 2b: Amélioration ou nouveau -->
+                    <div class="question-card" id="step2b">
+                        <h2>Cherchez-vous à améliorer votre site ou à en créer un nouveau ?</h2>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="ameliorer">
+                                <div class="option-icon">🔧</div>
+                                <span>Améliorer</span>
+                            </button>
+                            <button class="option-btn" data-value="nouveau">
+                                <div class="option-icon">🆕</div>
+                                <span>Créer un nouveau</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Étape 3: Identité graphique -->
+                    <div class="question-card" id="step3">
+                        <h2>Avez-vous une identité graphique / charte graphique ?</h2>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="oui">
+                                <div class="option-icon">🎨</div>
+                                <span>Oui</span>
+                            </button>
+                            <button class="option-btn" data-value="non">
+                                <div class="option-icon">❌</div>
+                                <span>Non</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Étape 4: Réseaux sociaux -->
+                    <div class="question-card" id="step4">
+                        <h2>Êtes-vous sur les réseaux sociaux ?</h2>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="oui">
+                                <div class="option-icon">📱</div>
+                                <span>Oui</span>
+                            </button>
+                            <button class="option-btn" data-value="non">
+                                <div class="option-icon">❌</div>
+                                <span>Non</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Étape 5: Budget -->
+                    <div class="question-card" id="step5">
+                        <h2>Quelle est votre fourchette de budget ?</h2>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="500-1000">
+                                <div class="option-icon">💰</div>
+                                <span>500€ - 1000€</span>
+                            </button>
+                            <button class="option-btn" data-value="1000-2000">
+                                <div class="option-icon">💰</div>
+                                <span>1000€ - 2000€</span>
+                            </button>
+                            <button class="option-btn" data-value="2000-5000">
+                                <div class="option-icon">💰</div>
+                                <span>2000€ - 5000€</span>
+                            </button>
+                            <button class="option-btn" data-value="5000+">
+                                <div class="option-icon">💰</div>
+                                <span>Plus de 5000€</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Étape 6: Type de site -->
+                    <div class="question-card" id="step6">
+                        <h2>Votre site a besoin de :</h2>
+                        <div class="options-grid">
+                            <button class="option-btn" data-value="1page">
+                                <div class="option-icon">📄</div>
+                                <span>1 page (site vitrine)</span>
+                            </button>
+                            <button class="option-btn" data-value="multipages">
+                                <div class="option-icon">📚</div>
+                                <span>Plusieurs pages (meilleur référencement)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Étape 7: Services complémentaires -->
+                    <div class="question-card" id="step7">
+                        <h2>Avez-vous besoin de services complémentaires ?</h2>
+                        <div class="options-grid multi-select">
+                            <button class="option-btn" data-value="qr-codes">
+                                <div class="option-icon">📱</div>
+                                <span>QR codes</span>
+                            </button>
+                            <button class="option-btn" data-value="videos">
+                                <div class="option-icon">🎥</div>
+                                <span>Vidéos</span>
+                            </button>
+                            <button class="option-btn" data-value="avis-google">
+                                <div class="option-icon">⭐</div>
+                                <span>Augmentation avis Google</span>
+                            </button>
+                            <button class="option-btn" data-value="seo">
+                                <div class="option-icon">🔍</div>
+                                <span>Référencement SEO</span>
+                            </button>
+                            <button class="option-btn" data-value="photos">
+                                <div class="option-icon">📸</div>
+                                <span>Shooting photo</span>
+                            </button>
+                            <button class="option-btn" data-value="aucun">
+                                <div class="option-icon">❌</div>
+                                <span>Aucun</span>
+                            </button>
+                        </div>
+                        <button class="continue-btn" id="continueBtn" style="display: none;">Continuer</button>
+                    </div>
+
+                    <!-- Étape 8: Résultats -->
+                    <div class="question-card" id="step8">
+                        <div class="results-container">
+                            <h2>Votre estimation personnalisée</h2>
+                            <div class="results-summary" id="resultsSummary">
+                                <!-- Résultats générés dynamiquement -->
+                            </div>
+                            <div class="final-cta">
+                                <p>Cette estimation est indicative. Pour une évaluation précise et personnalisée de votre projet, prenez rendez-vous avec moi.</p>
+                                <a href="#" class="cta-button">Prendre rendez-vous</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Background effects -->
+        <div class="bg-effects">
+            <div class="bg-blur bg-blur-1"></div>
+            <div class="bg-blur bg-blur-2"></div>
+            <div class="bg-blur bg-blur-3"></div>
+            <div class="bg-blur bg-blur-4"></div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html> 

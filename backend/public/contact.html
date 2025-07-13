@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Lucca - Créé en Bretagne, visible partout</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <img src="images/logos/logonavbar.png" alt="Lucca - Agence Web" class="logo-icon" width="80" height="80">
+                    <div class="logo-text">
+                    </div>
+                </a>
+                
+                <nav class="nav">
+                    <div class="nav-overlay"></div>
+                    <button class="nav-toggle" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="estimer-mes-besoins.html" class="nav-link">ESTIMER MES BESOINS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="blog.html" class="nav-link">BLOG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">CONTACT</a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <a href="contact.html" class="cta-button">NOUS CONTACTER</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-intro">
+                    <h1 class="contact-title">Parlons de votre projet</h1>
+                    <p class="contact-subtitle">
+                        Prêt à donner vie à votre projet web ? Contactez-nous pour un devis gratuit et personnalisé.
+                    </p>
+                </div>
+                
+                <div class="contact-grid">
+                    <!-- Formulaire de contact -->
+                    <div class="contact-form-container">
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Nom complet *</label>
+                                <input type="text" id="name" name="name" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email *</label>
+                                <input type="email" id="email" name="email" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Téléphone</label>
+                                <input type="tel" id="phone" name="phone" class="form-input">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company" class="form-label">Entreprise</label>
+                                <input type="text" id="company" name="company" class="form-input">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="service" class="form-label">Service souhaité *</label>
+                                <select id="service" name="service" class="form-select" required>
+                                    <option value="">Sélectionnez un service</option>
+                                    <option value="site-vitrine">Site vitrine</option>
+                                    <option value="site-ecommerce">Site e-commerce</option>
+                                    <option value="refonte">Refonte de site</option>
+                                    <option value="seo">Référencement SEO</option>
+                                    <option value="maintenance">Maintenance</option>
+                                    <option value="autre">Autre</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="budget" class="form-label">Budget approximatif</label>
+                                <select id="budget" name="budget" class="form-select">
+                                    <option value="">Sélectionnez votre budget</option>
+                                    <option value="moins-1000">Moins de 1 000€</option>
+                                    <option value="1000-3000">1 000€ - 3 000€</option>
+                                    <option value="3000-5000">3 000€ - 5 000€</option>
+                                    <option value="5000-10000">5 000€ - 10 000€</option>
+                                    <option value="plus-10000">Plus de 10 000€</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" class="form-label">Décrivez votre projet *</label>
+                                <textarea id="message" name="message" class="form-textarea" rows="6" placeholder="Parlez-nous de votre projet, vos objectifs, vos attentes..." required></textarea>
+                            </div>
+                            
+                            <div class="form-group form-checkbox">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="consent" name="consent" required>
+                                    <span class="checkmark"></span>
+                                    J'accepte que mes données soient utilisées pour me recontacter concernant ma demande *
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="form-submit">
+                                <span>Envoyer ma demande</span>
+                                <svg class="submit-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 19L19 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M19 12H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </form>
+                        
+                        <!-- Message de confirmation -->
+                        <div class="form-success" id="formSuccess">
+                            <div class="success-icon">
+                                <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="var(--primary-color)" stroke-width="2"/>
+                                    <path d="M9 12L11 14L15 10" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h3>Message envoyé avec succès !</h3>
+                            <p>Nous avons bien reçu votre demande et vous recontacterons dans les plus brefs délais.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Informations de contact -->
+                    <div class="contact-info">
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 5.5 7.5 1 12 1S21 5.5 21 10Z" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <h3>Adresse</h3>
+                                <p>Basés en Bretagne<br>Intervention partout en France</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M22 16.92V19.92C22 20.52 21.52 21 20.92 21C9.4 21 0 11.6 0 0.08C0 -0.52 0.48 -1 1.08 -1H4.08C4.68 -1 5.16 -0.52 5.16 0.08C5.16 2.08 5.52 4.04 6.2 5.84C6.36 6.24 6.24 6.72 5.88 7.08L4.12 8.84C5.84 12.4 8.6 15.16 12.16 16.88L13.92 15.12C14.28 14.76 14.76 14.64 15.16 14.8C16.96 15.48 18.92 15.84 20.92 15.84C21.52 15.84 22 16.32 22 16.92Z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <h3>Téléphone</h3>
+                                <p><a href="tel:+33664150100">06 64 15 01 00</a></p>
+                                <p class="phone-note">Suite à un nombre intensif de démarchage téléphonique, merci de laisser un message si vous êtes sans réponse</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="L22 6L12 13L2 6" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <h3>Email</h3>
+                                <p><a href="mailto:luccads.contact@gmail.com">luccads.contact@gmail.com</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <h3>Horaires</h3>
+                                <p>Lun - Ven : 9h - 18h<br>Réponse sous 48h</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Background effects -->
+        <div class="bg-effects">
+            <div class="bg-blur bg-blur-1"></div>
+            <div class="bg-blur bg-blur-2"></div>
+            <div class="bg-blur bg-blur-3"></div>
+            <div class="bg-blur bg-blur-4"></div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        // Gestion du formulaire de contact
+        const contactForm = document.getElementById('contactForm');
+        const formSuccess = document.getElementById('formSuccess');
+        const submitButton = contactForm.querySelector('.form-submit');
+        const originalButtonText = submitButton.innerHTML;
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Désactiver le bouton et afficher le chargement
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span>Envoi en cours...</span>';
+            
+            try {
+                // Récupération des données du formulaire
+                const formData = new FormData(contactForm);
+                const data = Object.fromEntries(formData.entries());
+                
+                // Envoi à l'API
+                const response = await fetch('/api/contact/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Succès
+                    contactForm.style.display = 'none';
+                    formSuccess.style.display = 'block';
+                    
+                    // Redirection après 5 secondes
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 5000);
+                } else {
+                    // Erreur
+                    throw new Error(result.error || 'Erreur lors de l\'envoi');
+                }
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                
+                // Afficher l'erreur à l'utilisateur
+                alert('Erreur lors de l\'envoi du message. Veuillez réessayer ou nous contacter directement.');
+                
+                // Réactiver le bouton
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
+            }
+        });
+
+        // Animation des champs au focus
+        const formInputs = document.querySelectorAll('.form-input, .form-select, .form-textarea');
+        
+        formInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (this.value === '') {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
