@@ -493,8 +493,8 @@
     </section>
 
     <script>
-        // Configuration API - URL du backend sur le VPS
-        const API_BASE = 'http://www.luccaweb.fr/api';
+        // Configuration API - URL du backend sur le VPS (HTTPS)
+        const API_BASE = 'https://www.luccaweb.fr/api';
         
         // État de l'application
         let currentPage = 1;
@@ -648,7 +648,7 @@
                 card.addEventListener('click', () => {
                     const slug = card.dataset.slug;
                     if (slug) {
-                        window.location.href = `http://www.luccaweb.fr/article/${slug}`;
+                        window.location.href = `https://www.luccaweb.fr/article/${slug}`;
                     }
                 });
             });
