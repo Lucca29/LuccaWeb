@@ -301,7 +301,7 @@ const api = {
         const formData = new FormData();
         formData.append('image', file);
 
-        const response = await fetch(`${API_BASE}/articles/upload`, {
+        const response = await fetch(`${API_BASE}/upload`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${authToken}`
