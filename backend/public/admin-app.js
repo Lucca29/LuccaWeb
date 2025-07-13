@@ -856,7 +856,7 @@ const ui = {
         document.getElementById('articleTitle').value = article.title;
         document.getElementById('articleSlug').value = article.slug;
         document.getElementById('articleExcerpt').value = article.excerpt || '';
-        document.getElementById('articleCategory').value = article.category_id || '';
+        document.getElementById('articleCategory').value = article.category || '';
         document.getElementById('articleTags').value = article.tags || '';
         document.getElementById('articleContent').innerHTML = article.content;
         document.getElementById('metaTitle').value = article.meta_title || '';
@@ -1379,7 +1379,7 @@ function initializeEventListeners() {
             slug: document.getElementById('articleSlug').value,
             excerpt: document.getElementById('articleExcerpt').value,
             content: document.getElementById('articleContent').innerHTML,
-            category_id: document.getElementById('articleCategory').value || null,
+            category: document.getElementById('articleCategory').value || null,
             tags: document.getElementById('articleTags').value,
             meta_title: document.getElementById('metaTitle').value,
             meta_description: document.getElementById('metaDescription').value,

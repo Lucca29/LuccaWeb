@@ -66,12 +66,12 @@ function initDatabase() {
         content TEXT,
         excerpt TEXT,
         featured_image TEXT,
-        category_id INTEGER,
+        category TEXT DEFAULT 'général',
         status TEXT DEFAULT 'draft',
         views INTEGER DEFAULT 0,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (category_id) REFERENCES categories (id)
+
     )`);
 
     // Créer l'utilisateur admin par défaut
@@ -160,14 +160,13 @@ app.get('/api/articles', (req, res) => {
     }
     
     if (category) {
-        whereClause += ' AND a.category_id = ?';
+        whereClause += ' AND a.category = ?';
         params.push(category);
     }
     
     const query = `
-        SELECT a.*, c.name as category_name, c.color as category_color
+        SELECT a.*
         FROM articles a
-        LEFT JOIN categories c ON a.category_id = c.id
         ${whereClause}
         ORDER BY a.created_at DESC
         LIMIT ? OFFSET ?
@@ -203,9 +202,8 @@ app.get('/api/articles/:slug', (req, res) => {
     const { slug } = req.params;
     
     const query = `
-        SELECT a.*, c.name as category_name, c.color as category_color
+        SELECT a.*
         FROM articles a
-        LEFT JOIN categories c ON a.category_id = c.id
         WHERE a.slug = ?
     `;
     
@@ -232,17 +230,17 @@ app.get('/api/articles/:slug', (req, res) => {
 });
 
 app.post('/api/articles', (req, res) => {
-    const { title, content, excerpt, category_id, status = 'draft' } = req.body;
+    const { title, content, excerpt, category, status = 'draft' } = req.body;
     const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
     
     const query = `
-        INSERT INTO articles (title, slug, content, excerpt, category_id, status)
+        INSERT INTO articles (title, slug, content, excerpt, category, status)
         VALUES (?, ?, ?, ?, ?, ?)
     `;
     
     try {
         const stmt = db.prepare(query);
-        const result = stmt.run(title, slug, content, excerpt, category_id, status);
+        const result = stmt.run(title, slug, content, excerpt, category, status);
         
         res.json({
             success: true,
@@ -256,18 +254,18 @@ app.post('/api/articles', (req, res) => {
 
 app.put('/api/articles/:id', (req, res) => {
     const { id } = req.params;
-    const { title, content, excerpt, category_id, status } = req.body;
+    const { title, content, excerpt, category, status } = req.body;
     const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
     
     const query = `
         UPDATE articles 
-        SET title = ?, slug = ?, content = ?, excerpt = ?, category_id = ?, status = ?, updated_at = CURRENT_TIMESTAMP
+        SET title = ?, slug = ?, content = ?, excerpt = ?, category = ?, status = ?, updated_at = CURRENT_TIMESTAMP
         WHERE id = ?
     `;
     
     try {
         const stmt = db.prepare(query);
-        stmt.run(title, slug, content, excerpt, category_id, status, id);
+        stmt.run(title, slug, content, excerpt, category, status, id);
         
         res.json({
             success: true,
