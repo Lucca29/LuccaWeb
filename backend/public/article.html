@@ -943,7 +943,7 @@
                     if (article.featured_image) {
                         const imageEl = document.getElementById('articleImage');
                         imageEl.style.display = 'block';
-                        imageEl.innerHTML = `<img src="${article.featured_image}" alt="${article.title}">`;
+                        imageEl.innerHTML = `<img src="/uploads/${article.featured_image}" alt="${article.title}">`;
                     } else {
                         const imageEl = document.getElementById('articleImage');
                         imageEl.style.display = 'block';
