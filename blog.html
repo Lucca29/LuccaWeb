@@ -493,8 +493,8 @@
     </section>
 
     <script>
-        // Configuration API - Modifiez cette URL selon votre environnement
-        const API_BASE = 'http://localhost:3000/api';
+        // Configuration API - URL du backend sur le VPS
+        const API_BASE = 'http://www.luccaweb.fr/api';
         
         // État de l'application
         let currentPage = 1;
@@ -605,7 +605,7 @@
                 if (error.message.includes('Failed to fetch')) {
                     document.getElementById('errorText').innerHTML = `
                         Le serveur API n'est pas accessible.<br>
-                        <small>Vérifiez que le serveur est démarré sur localhost:3000</small>
+                        <small>Vérifiez que le serveur est démarré sur www.luccaweb.fr</small>
                     `;
                 } else {
                     document.getElementById('errorText').textContent = error.message;
@@ -648,7 +648,7 @@
                 card.addEventListener('click', () => {
                     const slug = card.dataset.slug;
                     if (slug) {
-                        window.location.href = `http://localhost:3000/article/${slug}`;
+                        window.location.href = `http://www.luccaweb.fr/article/${slug}`;
                     }
                 });
             });
