@@ -92,10 +92,8 @@ app.use('/admin/styles.css', express.static(path.join(__dirname, '..', 'styles.c
 app.use('/admin/script.js', express.static(path.join(__dirname, '..', 'script.js')));
 app.use('/admin/images', express.static(path.join(__dirname, '..', 'images')));
 
-// Servir les fichiers statiques de l'admin (sauf admin.html)
-app.use('/admin', express.static(path.join(__dirname, 'public'), {
-    index: false // Empêcher de servir index.html par défaut
-}));
+// Servir les autres fichiers statiques de l'admin
+app.use('/admin', express.static(path.join(__dirname, 'public')));
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
