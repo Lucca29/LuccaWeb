@@ -95,6 +95,11 @@ app.get('/admin/', (req, res) => {
 // Servir les autres fichiers statiques de l'admin
 app.use('/admin', express.static(path.join(__dirname, 'public')));
 
+// Route pour le favicon
+app.get('/favicon.ico', (req, res) => {
+    res.status(204).end(); // No content
+});
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes API
