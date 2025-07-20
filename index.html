@@ -382,22 +382,39 @@
             </div>
             
             <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-card-content">
-                        <div class="pricing-badge">IDÉAL POUR DÉMARRER</div>
-                        <h4 class="pricing-title">Pack Standard</h4>
-                        
-                        <div class="pricing-price">
-                            <span class="price-current">999€</span>
-                            <span class="price-old">1258€</span>
+                <div class="pricing-card" id="standard-pack">
+                    <!-- Vue normale -->
+                    <div class="pack-normal-view">
+                        <div class="pricing-card-content">
+                            <div class="pricing-badge">IDÉAL POUR DÉMARRER</div>
+                            <h4 class="pricing-title">Pack Standard</h4>
+                            
+                            <div class="pricing-price">
+                                <span class="price-current">999€</span>
+                                <span class="price-old">1258€</span>
+                            </div>
+                            <div class="pricing-savings">Économisez 259€</div>
+                            
+                            <p class="pricing-subtitle">
+                                La solution parfaite pour établir votre présence en ligne avec impact
+                            </p>
                         </div>
-                        <div class="pricing-savings">Économisez 259€</div>
-                        
-                        <p class="pricing-subtitle">
-                            La solution parfaite pour établir votre présence en ligne avec impact
-                        </p>
+                        <button class="pricing-button" onclick="showStandardPackDetails()"><span>En savoir plus</span></button>
                     </div>
-                    <button class="pricing-button"><span>En savoir plus</span></button>
+                    
+                    <!-- Vue détails -->
+                    <div class="pack-details-view" style="display: none;">
+                        <button class="back-button" onclick="hideStandardPackDetails()">← Retour</button>
+                        <h4 class="pricing-title">Pack Standard - Détails</h4>
+                        
+                        <ul class="pricing-features">
+                            <li>Site Vitrine Professionnel - 1 page optimisée</li>
+                            <li>Design Responsive Mobile - Parfait sur tous les écrans</li>
+                            <li>Hébergement 1 An Offert - Valeur de 120€</li>
+                            <li>Optimisation SEO de Base - Visibilité Google</li>
+                            <li>Formulaire de Contact - Communication directe</li>
+                        </ul>
+                    </div>
                 </div>
                 
                 <div class="pricing-card pricing-featured" id="medium-pack">

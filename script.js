@@ -1248,10 +1248,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ==================== FONCTIONS PACK DETAILS ====================
 function showPackDetails() {
-    const normalView = document.querySelector('.pack-normal-view');
-    const detailsView = document.querySelector('.pack-details-view');
+    const pack = document.getElementById('medium-pack');
+    const normalView = pack.querySelector('.pack-normal-view');
+    const detailsView = pack.querySelector('.pack-details-view');
     
-    if (!normalView || !detailsView) return; // Sortir si les éléments n'existent pas
+    if (!normalView || !detailsView) return;
     
     normalView.style.display = 'none';
     detailsView.style.display = 'block';
@@ -1268,10 +1269,58 @@ function showPackDetails() {
 }
 
 function hidePackDetails() {
-    const normalView = document.querySelector('.pack-normal-view');
-    const detailsView = document.querySelector('.pack-details-view');
+    const pack = document.getElementById('medium-pack');
+    const normalView = pack.querySelector('.pack-normal-view');
+    const detailsView = pack.querySelector('.pack-details-view');
     
-    if (!normalView || !detailsView) return; // Sortir si les éléments n'existent pas
+    if (!normalView || !detailsView) return;
+    
+    detailsView.style.opacity = '0';
+    detailsView.style.transform = 'translateY(-20px)';
+    
+    setTimeout(() => {
+        detailsView.style.display = 'none';
+        normalView.style.display = 'block';
+        
+        // Animation d'entrée pour la vue normale
+        normalView.style.opacity = '0';
+        normalView.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            normalView.style.transition = 'all 0.3s ease';
+            normalView.style.opacity = '1';
+            normalView.style.transform = 'translateY(0)';
+        }, 10);
+    }, 300);
+}
+
+function showStandardPackDetails() {
+    const pack = document.getElementById('standard-pack');
+    const normalView = pack.querySelector('.pack-normal-view');
+    const detailsView = pack.querySelector('.pack-details-view');
+    
+    if (!normalView || !detailsView) return;
+    
+    normalView.style.display = 'none';
+    detailsView.style.display = 'block';
+    
+    // Animation d'entrée
+    detailsView.style.opacity = '0';
+    detailsView.style.transform = 'translateY(20px)';
+    
+    setTimeout(() => {
+        detailsView.style.transition = 'all 0.3s ease';
+        detailsView.style.opacity = '1';
+        detailsView.style.transform = 'translateY(0)';
+    }, 10);
+}
+
+function hideStandardPackDetails() {
+    const pack = document.getElementById('standard-pack');
+    const normalView = pack.querySelector('.pack-normal-view');
+    const detailsView = pack.querySelector('.pack-details-view');
+    
+    if (!normalView || !detailsView) return;
     
     detailsView.style.opacity = '0';
     detailsView.style.transform = 'translateY(-20px)';
