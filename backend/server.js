@@ -70,8 +70,7 @@ function initDatabase() {
         status TEXT DEFAULT 'draft',
         views INTEGER DEFAULT 0,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )`);
 
     // Créer l'utilisateur admin par défaut
