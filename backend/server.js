@@ -36,6 +36,12 @@ const upload = multer({
 
 // Servir les fichiers statiques pour l'admin uniquement
 app.use('/admin', express.static(path.join(__dirname, 'public')));
+
+// Servir les fichiers statiques depuis la racine pour l'admin
+app.use('/admin/styles.css', express.static(path.join(__dirname, '..', 'styles.css')));
+app.use('/admin/script.js', express.static(path.join(__dirname, '..', 'script.js')));
+app.use('/admin/images', express.static(path.join(__dirname, '..', 'images')));
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Initialisation de la base de données
