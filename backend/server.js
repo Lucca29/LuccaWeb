@@ -77,6 +77,11 @@ function initDatabase() {
     console.log('✅ Base de données initialisée');
 }
 
+// Servir les fichiers statiques pour l'admin (AVANT les routes générales)
+app.use('/admin/styles.css', express.static(path.join(__dirname, '..', 'styles.css')));
+app.use('/admin/script.js', express.static(path.join(__dirname, '..', 'script.js')));
+app.use('/admin/images', express.static(path.join(__dirname, '..', 'images')));
+
 // Route pour l'interface admin
 app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));
@@ -86,11 +91,6 @@ app.get('/admin', (req, res) => {
 app.get('/admin/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
-
-// Servir les fichiers statiques pour l'admin
-app.use('/admin/styles.css', express.static(path.join(__dirname, '..', 'styles.css')));
-app.use('/admin/script.js', express.static(path.join(__dirname, '..', 'script.js')));
-app.use('/admin/images', express.static(path.join(__dirname, '..', 'images')));
 
 // Servir les autres fichiers statiques de l'admin
 app.use('/admin', express.static(path.join(__dirname, 'public')));
