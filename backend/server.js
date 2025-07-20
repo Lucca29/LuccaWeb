@@ -34,14 +34,9 @@ const upload = multer({
     }
 });
 
-// Servir les fichiers statiques
-app.use(express.static(path.join(__dirname, 'public')));
+// Servir les fichiers statiques pour l'admin uniquement
+app.use('/admin', express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-// Servir les images et vidéos depuis la racine du projet
-app.use('/images', express.static(path.join(__dirname, '..', 'images')));
-app.use('/styles.css', express.static(path.join(__dirname, '..', 'styles.css')));
-app.use('/script.js', express.static(path.join(__dirname, '..', 'script.js')));
 
 // Initialisation de la base de données
 function initDatabase() {
@@ -87,45 +82,9 @@ function initDatabase() {
     console.log('✅ Base de données initialisée');
 }
 
-// Routes pour les pages principales
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'index.html'));
-});
-
-app.get('/index.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'index.html'));
-});
-
-app.get('/contact.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'contact.html'));
-});
-
-app.get('/services.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'services.html'));
-});
-
-app.get('/services-identite.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'services-identite.html'));
-});
-
-app.get('/services-sur-mesure.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'services-sur-mesure.html'));
-});
-
-app.get('/cas-etudes.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'cas-etudes.html'));
-});
-
-app.get('/qui-sommes-nous.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'qui-sommes-nous.html'));
-});
-
-app.get('/estimer-mes-besoins.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'estimer-mes-besoins.html'));
-});
-
-app.get('/avis.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'avis.html'));
+// Route pour l'interface admin
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 // Routes API
