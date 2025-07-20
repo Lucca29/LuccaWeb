@@ -692,13 +692,13 @@ body {
 .pricing-features li {
     padding: 8px 0;
     position: relative;
-    padding-left: 30px;
+    padding-left: 0;
     color: #64748b;
     line-height: 1.4;
 }
 
 .pricing-features li::before {
-    content: "✓";
+    content: "";
     position: absolute;
     left: 0;
     color: #059669;
