@@ -88,7 +88,14 @@ app.get('/admin/', (req, res) => {
 });
 
 // Servir les fichiers statiques de l'admin (CSS, JS, images)
-app.use('/admin', express.static(path.join(__dirname, 'public')));
+app.use('/admin', express.static(path.join(__dirname, 'public'), {
+    setHeaders: (res, path) => {
+        // Exclure script.js de l'admin
+        if (path.endsWith('script.js')) {
+            res.status(404).end();
+        }
+    }
+}));
 app.use('/admin/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Route pour le favicon
