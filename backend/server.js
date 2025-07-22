@@ -77,11 +77,6 @@ function initDatabase() {
     console.log('✅ Base de données initialisée');
 }
 
-// Servir les fichiers statiques pour l'admin (AVANT les routes générales)
-app.use('/admin/styles.css', express.static(path.join(__dirname, '..', 'styles.css')));
-app.use('/admin/script.js', express.static(path.join(__dirname, '..', 'script.js')));
-app.use('/admin/images', express.static(path.join(__dirname, '..', 'images')));
-
 // Route pour l'interface admin
 app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));
@@ -92,8 +87,12 @@ app.get('/admin/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
-// Servir les autres fichiers statiques de l'admin
-app.use('/admin', express.static(path.join(__dirname, 'public')));
+// Servir les fichiers statiques de l'admin (CSS, JS, images)
+app.use('/admin/styles.css', express.static(path.join(__dirname, 'public', 'styles.css')));
+app.use('/admin/admin-style.css', express.static(path.join(__dirname, 'public', 'admin-style.css')));
+app.use('/admin/admin-app.js', express.static(path.join(__dirname, 'public', 'admin-app.js')));
+app.use('/admin/images', express.static(path.join(__dirname, 'public')));
+app.use('/admin/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Route pour le favicon
 app.get('/favicon.ico', (req, res) => {
