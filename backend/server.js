@@ -87,15 +87,13 @@ app.get('/admin/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
+// Bloquer l'accès à script.js sous /admin (AVANT les routes statiques)
+app.get('/admin/script.js', (req, res) => {
+    res.status(404).end();
+});
+
 // Servir les fichiers statiques de l'admin (CSS, JS, images)
-app.use('/admin', express.static(path.join(__dirname, 'public'), {
-    setHeaders: (res, path) => {
-        // Exclure script.js de l'admin
-        if (path.endsWith('script.js')) {
-            res.status(404).end();
-        }
-    }
-}));
+app.use('/admin', express.static(path.join(__dirname, 'public')));
 app.use('/admin/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Route pour le favicon
