@@ -389,6 +389,53 @@ app.delete('/api/categories/:id', (req, res) => {
     }
 });
 
+// Routes des statistiques
+app.get('/api/articles/stats/dashboard', (req, res) => {
+    try {
+        // Statistiques du dashboard
+        const totalArticles = db.prepare('SELECT COUNT(*) as count FROM articles').get().count;
+        const publishedArticles = db.prepare('SELECT COUNT(*) as count FROM articles WHERE status = "published"').get().count;
+        const totalViews = db.prepare('SELECT SUM(views) as total FROM articles').get().total || 0;
+        const totalCategories = db.prepare('SELECT COUNT(*) as count FROM categories').get().count;
+        
+        res.json({
+            success: true,
+            data: {
+                totalArticles,
+                publishedArticles,
+                totalViews,
+                totalCategories,
+                draftArticles: totalArticles - publishedArticles
+            }
+        });
+    } catch (error) {
+        console.error('Erreur statistiques dashboard:', error);
+        res.status(500).json({ success: false, message: 'Erreur serveur' });
+    }
+});
+
+app.get('/api/articles/stats/detailed', (req, res) => {
+    try {
+        const { period = 30 } = req.query;
+        
+        // Statistiques détaillées
+        const recentArticles = db.prepare('SELECT * FROM articles ORDER BY created_at DESC LIMIT 5').all();
+        const popularArticles = db.prepare('SELECT * FROM articles WHERE status = "published" ORDER BY views DESC LIMIT 5').all();
+        
+        res.json({
+            success: true,
+            data: {
+                recentArticles,
+                popularArticles,
+                period: parseInt(period)
+            }
+        });
+    } catch (error) {
+        console.error('Erreur statistiques détaillées:', error);
+        res.status(500).json({ success: false, message: 'Erreur serveur' });
+    }
+});
+
 // Upload d'images
 app.post('/api/upload', upload.single('image'), (req, res) => {
     if (!req.file) {
