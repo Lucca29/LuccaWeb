@@ -1,5 +1,5 @@
 // Configuration de l'API
-const API_BASE = 'https://luccaweb.fr/api';
+const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3000/api' : 'https://luccaweb.fr/api';
 console.log('🔧 API_BASE configuré:', API_BASE);
 let authToken = localStorage.getItem('authToken');
 console.log('🔑 Token initial:', authToken ? 'TROUVÉ' : 'AUCUN');
