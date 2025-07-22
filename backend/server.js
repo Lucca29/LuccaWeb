@@ -182,8 +182,16 @@ app.get('/api/articles', (req, res) => {
     let params = [];
     
     if (status) {
-        whereClause += ' AND a.status = ?';
-        params.push(status);
+        if (status.includes(',')) {
+            // Gérer les statuts multiples (ex: "published,draft")
+            const statuses = status.split(',').map(s => s.trim());
+            const placeholders = statuses.map(() => '?').join(',');
+            whereClause += ` AND a.status IN (${placeholders})`;
+            params.push(...statuses);
+        } else {
+            whereClause += ' AND a.status = ?';
+            params.push(status);
+        }
     }
     
     if (category) {
